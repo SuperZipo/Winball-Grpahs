@@ -16,7 +16,7 @@ export class BarComponent implements OnInit {
 
   private svg;
   private margin = 50;
-  private width = 750 - (this.margin * 2);
+  private width = screen.width / 2 - (this.margin * 2);
   private height = 400 - (this.margin * 2);
 
   groups: Group[] = [];
@@ -84,7 +84,9 @@ export class BarComponent implements OnInit {
       }
     });
 
-    d3.selectAll("svg").remove();
+    let temp = d3.selectAll("svg");
+    temp["_groups"][0][0].remove();
+    
     this.createSvg();
     this.drawBars(this.data);
   }

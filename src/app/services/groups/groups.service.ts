@@ -27,5 +27,9 @@ export class GroupsService {
     return this.http.get<User[]>(this.usersUrl + "/all", this.httpOptions);
   }
 
+  getGroupsCountPerManager(): Observable<any[]> {
+    return this.http.get<any[]>(this.groupsUrl + "/groupsCountPerManager");
+  }
+
   constructor(private http: HttpClient) {}
 }
