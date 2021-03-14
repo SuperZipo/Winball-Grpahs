@@ -1,0 +1,7 @@
+<h2>Points Per User</h2>
+<button mat-button [matMenuTriggerFor]="menu">Choose Group</button>
+<mat-menu #menu="matMenu" focusFirstItem="false">
+  <button (click)="handleGroupChange(group)" *ngFor="let group of groups" mat-menu-item>{{ group.name }}</button>
+</mat-menu>
+
+<figure id="pointsPerUserInGroupBar"></figure>
