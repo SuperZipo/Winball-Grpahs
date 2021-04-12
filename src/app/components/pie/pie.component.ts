@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { thresholdSturges } from 'd3';
 import { forkJoin } from 'rxjs';
 import { GroupsService } from 'src/app/services/groups/groups.service';
 import { User } from '../../../../../server/client/src/modles/User';
@@ -12,6 +13,7 @@ import { User } from '../../../../../server/client/src/modles/User';
 export class PieComponent implements OnInit {
 
   private usersIdsToNames = {};
+  private usersIdsToGroupsCount = {};
   private data: any[] = [];
   private svg;
   private margin = 50;
@@ -69,20 +71,25 @@ export class PieComponent implements OnInit {
       .data(pie(this.data))
       .enter()
       .append('text')
-      .text(d => this.usersIdsToNames[d.data._id])
+      .text(d => this.usersIdsToNames[d.data._id] + " - " + this.usersIdsToGroupsCount[d.data._id])
       .attr("transform", d => "translate(" + labelLocation.centroid(d) + ")")
       .style("text-anchor", "middle")
       .style("font-size", 18);
   }
 
   getGraphData() {
-    forkJoin([this.groupsService.getGroupsCountPerManager(), this.groupsService.getUsers()]).subscribe(data => {
+    forkJoin([this.groupsService.getGroupsCountPerManager(), 
+      this.groupsService.getUsers()]).subscribe(data => {
       this.data = data[0];
       this.users = data[1];
       
       this.users.forEach(usr => {
         this.usersIdsToNames[usr._id] = usr.displayName
       });
+
+      this.data.forEach(data => {
+        this.usersIdsToGroupsCount[data._id] = data.groupsCount 
+      })
 
       this.createSvg();
       this.createColors();

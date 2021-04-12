@@ -9,6 +9,7 @@ import { BarComponent } from './components/bar/bar.component';
 import { PieComponent } from './components/pie/pie.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu/';
+import { TotalPointsPerUserGraphComponent } from './total-points-per-user-graph/total-points-per-user-graph.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu/';
     AppComponent,
     BarComponent,
     PieComponent,
+    TotalPointsPerUserGraphComponent,
   ],
   imports: [
     BrowserModule,

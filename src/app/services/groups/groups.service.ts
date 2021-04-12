@@ -31,5 +31,9 @@ export class GroupsService {
     return this.http.get<any[]>(this.groupsUrl + "/groupsCountPerManager");
   }
 
+  getTotalPointsPerUser(): Observable<any[]> {
+    return this.http.get<any[]>(this.groupsUrl + "/getTotalPointsPerUser");
+  }
+
   constructor(private http: HttpClient) {}
 }
